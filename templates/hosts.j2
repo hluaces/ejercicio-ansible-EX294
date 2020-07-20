@@ -1,3 +1,5 @@
-{% for nombre_servidor, datos_servidor in hostvars.items()) %}
-    {{ datos_servidor['ansible_default_ipv4']['address'] }} {{ datos_servidor['ansible_fqdn'] }}
+{% for nombre_servidor, datos in hostvars.items()) %}
+{% if 'default_ipv4' in datos['ansible_facts'] %}
+{{ datos['ansible_facts']['default_ipv4']['address'] }} {{ nombre_servidor }}
+{% endif %}
 {% endfor %}
